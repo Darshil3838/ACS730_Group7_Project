@@ -48,3 +48,19 @@ resource "aws_lb" "alb" {
      "Name" = "${local.name_prefix}-alb"
   }
 }
+
+
+
+
+
+# Load balancer target group  cccccc
+resource "aws_lb_target_group" "group" {
+  name     = "loadbalancer-targetgroup"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = data.terraform_remote_state.network.outputs.vpc_id
+  
+  
+  
+
+}
