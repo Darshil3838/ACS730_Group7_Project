@@ -7,7 +7,7 @@ variable "instance_type" {
 
 # Variable to signal the current environment 
 variable "env" {
-  default     = "dev"
+  default     = "staging"
   type        = string
   description = "staging environment"
 }
