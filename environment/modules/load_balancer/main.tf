@@ -60,7 +60,7 @@ resource "aws_lb_target_group" "group" {
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.network.outputs.vpc_id
   
-  
+
   
 
 }
