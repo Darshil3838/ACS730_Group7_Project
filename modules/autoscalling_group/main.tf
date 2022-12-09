@@ -11,7 +11,7 @@ provider "aws" {
 data "terraform_remote_state" "network" {
   backend = "s3"
   config = {
-    bucket = "${var.env}-group7"
+    bucket = "${var.env}-group7-project"
     key    = "${var.env}-network/terraform.tfstate"
     region = "us-east-1"
   }
@@ -29,7 +29,7 @@ locals {
 
 # Auto Scaling Group
 resource "aws_autoscaling_group" "asg_bar" {
-  name                 = "dev-asg"
+  name                 = "${var.env}-asg"
   desired_capacity     = var.desired_size
   max_size             = var.max_size
   min_size             = var.min_size
