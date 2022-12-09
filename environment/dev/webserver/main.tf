@@ -94,7 +94,7 @@ cidr_blocks      = ["0.0.0.0/0"]
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
-
+# merging tags
   tags = merge(local.default_tags,
     {
       "Name" = "${local.name_prefix}-Sg-Bastion"
