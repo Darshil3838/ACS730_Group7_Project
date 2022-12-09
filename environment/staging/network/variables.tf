@@ -26,9 +26,17 @@ variable "env" {
 
 # VPC CIDR range
 variable "vpc_cidr" {
-  default     = "10.100.0.0/16"
+  default     = "10.200.0.0/16"
   type        = string
   description = "VPC for Dev environment"
+}
+
+
+# Number of Instances in ASG
+variable "instance_count" {
+  default     = "3"
+  type        = string
+  description = "Dev Environment Instances Count"
 }
 
 
@@ -36,7 +44,7 @@ variable "vpc_cidr" {
 
 # Provision public subnets in VPC
 variable "public_subnet_cidrs" {
-  default     = ["10.100.1.0/24", "10.100.2.0/24", "10.100.3.0/24"]
+  default     = ["10.200.1.0/24", "10.200.2.0/24", "10.200.3.0/24"]
   type        = list(string)
   description = "Public Subnet CIDRs"
 }
@@ -45,7 +53,7 @@ variable "public_subnet_cidrs" {
 
 # Provision private subnets in VPC
 variable "private_subnet_cidrs" {
-  default     = ["10.100.4.0/24", "10.100.5.0/24", "10.100.6.0/24"]
+  default     = ["10.200.4.0/24", "10.200.5.0/24", "10.200.6.0/24"]
   type        = list(string)
   description = "Private Subnet CIDRs"
 }
