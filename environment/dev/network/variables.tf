@@ -34,6 +34,8 @@ variable "vpc_cidr" {
 
 
 
+
+
 # Provision public subnets in VPC
 variable "public_subnet_cidrs" {
   default     = ["10.100.1.0/24", "10.100.2.0/24", "10.100.3.0/24"]
@@ -48,4 +50,21 @@ variable "private_subnet_cidrs" {
   default     = ["10.100.4.0/24", "10.100.5.0/24", "10.100.6.0/24"]
   type        = list(string)
   description = "Private Subnet CIDRs"
+}
+
+
+
+
+# Number of Instances in ASG
+variable "instance_count" {
+  default = 2
+  type        = string
+  description = "Dev Environment Instances Count"
+}
+
+# ASG Instance Type
+variable "type" {
+  default     = "t3.micro"
+  type        = string
+  description = "Dev Environment Instances Type"
 }

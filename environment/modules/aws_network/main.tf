@@ -7,6 +7,12 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
+# Retrieve global variables from the Terraform module
+module "globalvars" {
+  source = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/globalvars"
+}
+
+
 # Define tags locally
 locals {
   default_tags = merge(var.default_tags, { "env" = var.env })

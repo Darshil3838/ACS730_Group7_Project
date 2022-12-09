@@ -57,3 +57,12 @@ variable "private_subnet_cidrs" {
   type        = list(string)
   description = "Private Subnet CIDRs"
 }
+
+
+
+# ASG Instance Type
+variable "type" {
+  default     = "t3.small"
+  type        = string
+  description = "Dev Environment Instances Type"
+}
