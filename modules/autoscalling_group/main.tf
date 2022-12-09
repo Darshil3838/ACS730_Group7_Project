@@ -88,3 +88,34 @@ resource "aws_cloudwatch_metric_alarm" "metric_asg_policy_down" {
   }
 }
 
+
+
+
+
+#Creating Scaling policy for AutoScaling Groupc combined CPU usage of all the instances reaches or greater  10% 
+resource "aws_autoscaling_policy" "asg_policy10_up" {
+  name                   = "${local.name_prefix}-asg_policy_up"
+  autoscaling_group_name = aws_autoscaling_group.asg_bar.name
+  adjustment_type        = "ChangeInCapacity"
+  scaling_adjustment     = 1
+  cooldown               = 300
+}
+
+
+#Creating an alarm metric when combined CPU usage of all the instances  reaches or greater  10% 
+resource "aws_cloudwatch_metric_alarm" "metric_asg_policy10_up" {
+  alarm_description   = " CPU usage of all the instances  reaches or greater  10%"
+  alarm_actions       = [aws_autoscaling_policy.asg_policy10_up.arn]
+  alarm_name          = "${local.name_prefix}_scale_up"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  namespace           = "AWS/EC2"
+  metric_name         = "CPUUtilization"
+  threshold           = "10"
+  evaluation_periods  = "2"
+  period              = "120"
+  statistic           = "Average"
+
+  dimensions = {
+    AutoScalingGroupName = aws_autoscaling_group.asg_bar.name
+  }
+}
