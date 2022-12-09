@@ -29,7 +29,7 @@ locals {
 
 # Retrieve global variables from the Terraform module
 module "globalvars" {
-  source = "../../../modules/globalvars"
+  source = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/globalvars"
 }
 
 
@@ -37,7 +37,7 @@ module "globalvars" {
 data "terraform_remote_state" "network" {
   backend = "s3"
   config = {
-    bucket = "${var.env}-group7"
+    bucket = "${var.env}-group7-project"
     key    = "${var.env}-network/terraform.tfstate"
     region = "us-east-1"
   }
@@ -50,7 +50,7 @@ resource "aws_instance" "bastion" {
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.web_key.key_name
   subnet_id                   = data.terraform_remote_state.network.outputs.public_subnet_id[0]
-  security_groups             = [aws_security_group.sg_bastion.id]
+  security_groups             = [module.sg-dev.bastion_sg_id]
   associate_public_ip_address = true
 
   lifecycle {
