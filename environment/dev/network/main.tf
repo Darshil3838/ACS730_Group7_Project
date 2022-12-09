@@ -1,6 +1,6 @@
 # Module to deploy dev networking 
 module "dev" {
-  source               = "../../../modules/aws_network"
+  source               = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules"
   env                  = var.env
   vpc_cidr             = var.vpc_cidr
   public_subnet_cidrs  = var.public_subnet_cidrs
