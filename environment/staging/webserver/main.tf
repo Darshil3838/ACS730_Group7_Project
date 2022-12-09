@@ -50,7 +50,7 @@ resource "aws_instance" "bastion" {
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.web_key.key_name
   subnet_id                   = data.terraform_remote_state.network.outputs.public_subnet_id[0]
-  security_groups             = [module.sg-dev.bastion_sg_id]
+  security_groups             = [module.sg-staging.bastion_sg_id]
   associate_public_ip_address = true
 
   lifecycle {
@@ -89,7 +89,7 @@ module "alb-staging" {
   prefix       = module.globalvars.prefix
   default_tags = module.globalvars.default_tags
   env          = var.env
-  sg_id        = module.sg-dev.lb_sg_id
+  sg_id        = module.sg-staging.lb_sg_id
 }
 
 
@@ -109,7 +109,6 @@ module "asg-staging" {
   prefix             = module.globalvars.prefix
   env                = var.env
   default_tags       = module.globalvars.default_tags
-  #desired_capacity   = var.asg_desired_size
   target_group_arn   = module.alb-staging.aws_lb_target_group_arn
   launch_config_name = module.launch-config-staging.launch_config_name
 }
