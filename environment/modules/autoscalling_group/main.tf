@@ -27,9 +27,11 @@ locals {
 
 
 
+
+
 # Auto Scaling Group
 resource "aws_autoscaling_group" "asg_bar" {
-  name                 = "${var.env}-asg"
+  name                 = "dev-asg"
   desired_capacity     = var.desired_size
   max_size             = var.max_size
   min_size             = var.min_size
@@ -52,6 +54,7 @@ resource "aws_autoscaling_group" "asg_bar" {
     propagate_at_launch = true
   }
 }
+
 
 
 
@@ -91,7 +94,6 @@ resource "aws_cloudwatch_metric_alarm" "metric_asg_policy_down" {
 
 
 
-
 #Creating Scaling policy for AutoScaling Groupc combined CPU usage of all the instances reaches or greater  10% 
 resource "aws_autoscaling_policy" "asg_policy10_up" {
   name                   = "${local.name_prefix}-asg_policy_up"
@@ -119,4 +121,3 @@ resource "aws_cloudwatch_metric_alarm" "metric_asg_policy10_up" {
     AutoScalingGroupName = aws_autoscaling_group.asg_bar.name
   }
 }
-s

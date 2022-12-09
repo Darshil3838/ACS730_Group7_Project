@@ -32,6 +32,7 @@ variable "env" {
 
 
 
+
 variable "target_group_arn" {
   type        = string
   description = "calling load_balancers id"
@@ -39,24 +40,23 @@ variable "target_group_arn" {
 
 variable "launch_config_name" {
   type        = string
-  description = "template_name from launch config"
+  description = "calling template_name from launch config"
 }
 
 variable "min_size" {
   default     = 2
   type        = number
-  description = "Minimum capacity"
+  description = "Minimum capacity of Auto scaling group"
 }
 
 variable "max_size" {
   default     = 4
   type        = number
-  description = "Maximum capacity"
+  description = "Maximum capacity of Auto scaling group"
 }
 
 variable "desired_size" {
   default     = 2
   type        = number
-  description = "Desired capacity"
+  description = "Desired capacity of Auto scaling group"
 }
-
