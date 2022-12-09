@@ -139,3 +139,15 @@ module "launch-config-dev" {
   sg_id         = module.sg-dev.lb_sg_id
   instance_type = var.instance_type
 }
+
+
+# Auto Scaling Group
+module "asg-dev" {
+  source             = "/home/ec2-user/environment/environment/modules/autoscalling_group"
+  prefix             = module.globalvars.prefix
+  env                = var.env
+  default_tags       = module.globalvars.default_tags
+  #desired_capacity   = var.asg_desired_size
+  target_group_arn   = module.alb-dev.aws_lb_target_group_arn
+  launch_config_name = module.launch-config-dev.launch_config_name
+}
