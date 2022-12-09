@@ -102,3 +102,18 @@ cidr_blocks      = ["0.0.0.0/0"]
   )
 }
 
+
+
+
+
+
+#Deploy security groups 
+module "sg-dev" {
+  source       = "/home/ec2-user/environment/environment/modules/sg_group"
+  prefix       = module.globalvars.prefix
+  default_tags = module.globalvars.default_tags
+  env          = var.env
+}
+
+
+
