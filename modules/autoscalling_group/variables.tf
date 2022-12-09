@@ -1,0 +1,62 @@
+
+
+# Default tags
+variable "default_tags" {
+  default = {
+    "Owner" = "Darshil, Harsh, Bishal"
+    "App"   = "Web"
+  }
+  type        = map(any)
+  description = "Default tags to be appliad to all AWS resources"
+}
+
+# Name prefix
+variable "prefix" {
+  default     = "Group7"
+  type        = string
+  description = "Name prefix"
+}
+
+
+
+
+
+# Variable to signal the current environment 
+variable "env" {
+  default     = "dev"
+  type        = string
+  description = "dev environment"
+}
+
+
+
+
+
+variable "target_group_arn" {
+  type        = string
+  description = "calling load_balancers id"
+}
+
+variable "launch_config_name" {
+  type        = string
+  description = "template_name from launch config"
+}
+
+variable "min_size" {
+  default     = 2
+  type        = number
+  description = "Minimum capacity"
+}
+
+variable "max_size" {
+  default     = 4
+  type        = number
+  description = "Maximum capacity"
+}
+
+variable "desired_size" {
+  default     = 2
+  type        = number
+  description = "Desired capacity"
+}
+
