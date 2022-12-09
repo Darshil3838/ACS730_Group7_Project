@@ -29,7 +29,7 @@ locals {
 
 # Retrieve global variables from the Terraform module
 module "globalvars" {
-  source = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/globalvars"
+  source = "../../../modules/globalvars"
 }
 
 
@@ -37,7 +37,7 @@ module "globalvars" {
 data "terraform_remote_state" "network" {
   backend = "s3"
   config = {
-    bucket = "${var.env}-group7-project"
+    bucket = "${var.env}-group7"
     key    = "${var.env}-network/terraform.tfstate"
     region = "us-east-1"
   }
@@ -71,7 +71,7 @@ resource "aws_key_pair" "web_key" {
   public_key = file("${local.name_prefix}.pub")
 }
 
-
+/*
 # Security Group for Bastion VM
 resource "aws_security_group" "sg_bastion" {
   name        = "allow_ssh_bastion"
@@ -104,7 +104,7 @@ cidr_blocks      = ["0.0.0.0/0"]
 
 
 
-
+*/
 
 
 #Deploy security groups 
