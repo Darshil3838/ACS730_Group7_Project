@@ -119,3 +119,4 @@ resource "aws_cloudwatch_metric_alarm" "metric_asg_policy10_up" {
     AutoScalingGroupName = aws_autoscaling_group.asg_bar.name
   }
 }
+s
