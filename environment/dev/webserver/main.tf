@@ -117,3 +117,25 @@ module "sg-dev" {
 
 
 
+
+
+
+
+#Deploy application load balancer
+module "alb-dev" {
+  source       = "/home/ec2-user/environment/environment/modules/load_blancer"
+  prefix       = module.globalvars.prefix
+  default_tags = module.globalvars.default_tags
+  env          = var.env
+  sg_id        = module.sg-dev.lb_sg_id
+}
+
+
+#Deploy webserver launch configuration
+module "launch-config-dev" {
+  source        = "/home/ec2-user/environment/environment/modules/launch_config"
+  prefix        = module.globalvars.prefix
+  env           = var.env
+  sg_id         = module.sg-dev.lb_sg_id
+  instance_type = var.instance_type
+}
