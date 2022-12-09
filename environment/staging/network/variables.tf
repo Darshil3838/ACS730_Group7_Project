@@ -34,7 +34,7 @@ variable "vpc_cidr" {
 
 # Number of Instances in ASG
 variable "instance_count" {
-  default     = "3"
+  default     = 3
   type        = string
   description = "Dev Environment Instances Count"
 }
