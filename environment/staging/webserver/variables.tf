@@ -35,7 +35,7 @@ variable "cloud_public_ip"{
 
 
 variable "min_size" {
-  default     = 2
+  default     = 3
   type        = number
   description = "Minimum capacity of Auto scaling group"
 }
