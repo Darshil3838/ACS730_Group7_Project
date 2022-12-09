@@ -50,7 +50,7 @@ resource "aws_instance" "bastion" {
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.web_key.key_name
   subnet_id                   = data.terraform_remote_state.network.outputs.public_subnet_id[0]
-  security_groups             = [aws_security_group.sg_bastion.id]
+  security_groups             = [module.sg-dev.bastion_sg_id]
   associate_public_ip_address = true
 
   lifecycle {
@@ -71,7 +71,7 @@ resource "aws_key_pair" "web_key" {
   public_key = file("${local.name_prefix}.pub")
 }
 
-
+/*
 # Security Group for Bastion VM
 resource "aws_security_group" "sg_bastion" {
   name        = "allow_ssh_bastion"
@@ -104,7 +104,7 @@ cidr_blocks      = ["0.0.0.0/0"]
 
 
 
-
+*/
 
 
 #Deploy security groups 
