@@ -29,7 +29,7 @@ locals {
 
 # Retrieve global variables from the Terraform module
 module "globalvars" {
-  source = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/globalvars"
+  source = "/home/ec2-user/environment/ACS730_Group7_Project/modules/globalvars"
 }
 
 
@@ -71,45 +71,12 @@ resource "aws_key_pair" "web_key" {
   public_key = file("${local.name_prefix}.pub")
 }
 
-/*
-# Security Group for Bastion VM
-resource "aws_security_group" "sg_bastion" {
-  name        = "allow_ssh_bastion"
-  description = "Allow SSH inbound traffic"
-  vpc_id      = data.terraform_remote_state.network.outputs.vpc_id
 
-  ingress {
-    description      = "SSH from admin"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-# merging tags
-  tags = merge(local.default_tags,
-    {
-      "Name" = "${local.name_prefix}-Sg-Bastion"
-    }
-  )
-}
-
-
-
-*/
 
 
 #Deploy security groups 
 module "sg-dev" {
-  source       = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/sg_group"
+  source       = "/home/ec2-user/environment/ACS730_Group7_Project/modules/sg_group"
   prefix       = module.globalvars.prefix
   default_tags = module.globalvars.default_tags
   env          = var.env
@@ -123,7 +90,7 @@ module "sg-dev" {
 
 #Deploy application load balancer
 module "alb-dev" {
-  source       = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/load_balancer"
+  source       = "/home/ec2-user/environment/ACS730_Group7_Project/modules/load_balancer"
   prefix       = module.globalvars.prefix
   default_tags = module.globalvars.default_tags
   env          = var.env
@@ -133,7 +100,7 @@ module "alb-dev" {
 
 #Deploy webserver launch configuration
 module "launch-config-dev" {
-  source        = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/launch_config"
+  source        = "/home/ec2-user/environment/ACS730_Group7_Project/modules/launch_config"
   prefix        = module.globalvars.prefix
   env           = var.env
   sg_id         = module.sg-dev.lb_sg_id
@@ -143,7 +110,7 @@ module "launch-config-dev" {
 
 # Auto Scaling Group
 module "asg-dev" {
-  source             = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/autoscalling_group"
+  source             = "/home/ec2-user/environment/ACS730_Group7_Project/modules/autoscalling_group"
   prefix             = module.globalvars.prefix
   env                = var.env
   default_tags       = module.globalvars.default_tags

@@ -29,7 +29,7 @@ locals {
 
 # Retrieve global variables from the Terraform module
 module "globalvars" {
-  source = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/globalvars"
+  source = "/home/ec2-user/environment/ACS730_Group7_Project/modules/globalvars"
 }
 
 
@@ -74,7 +74,7 @@ resource "aws_key_pair" "web_key" {
 
 #Deploy security groups 
 module "sg-staging" {
-  source       = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/sg_group"
+  source       = "/home/ec2-user/environment/ACS730_Group7_Project/modules/sg_group"
   prefix       = module.globalvars.prefix
   default_tags = module.globalvars.default_tags
   env          = var.env
@@ -85,7 +85,7 @@ module "sg-staging" {
 
 #Deploy application load balancer
 module "alb-staging" {
-  source       = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/load_balancer"
+  source       = "/home/ec2-user/environment/ACS730_Group7_Project/modules/load_balancer"
   prefix       = module.globalvars.prefix
   default_tags = module.globalvars.default_tags
   env          = var.env
@@ -95,7 +95,7 @@ module "alb-staging" {
 
 #Deploy webserver launch configuration
 module "launch-config-staging" {
-  source        = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/launch_config"
+  source        = "/home/ec2-user/environment/ACS730_Group7_Project/modules/launch_config"
   prefix        = module.globalvars.prefix
   env           = var.env
   sg_id         = module.sg-staging.lb_sg_id
@@ -105,7 +105,7 @@ module "launch-config-staging" {
 
 # Auto Scaling Group
 module "asg-staging" {
-  source             = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/autoscalling_group"
+  source             = "/home/ec2-user/environment/ACS730_Group7_Project/modules/autoscalling_group"
   prefix             = module.globalvars.prefix
   env                = var.env
   default_tags       = module.globalvars.default_tags
