@@ -13,8 +13,12 @@ sudo aws s3 cp s3://dev-group7/lilly.jpeg /var/www/html/
 
 
 echo "
+    <h1 align="center">
+    
+    Our private IP is $myip</h1>
+    
     <h1>
-    Our private IP is $myip
+    
     <table border="5" bordercolor="grey" align="center">
     <tr>
         <th colspan="3">Group7</th> 

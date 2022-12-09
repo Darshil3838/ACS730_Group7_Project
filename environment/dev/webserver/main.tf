@@ -29,7 +29,7 @@ locals {
 
 # Retrieve global variables from the Terraform module
 module "globalvars" {
-  source = "../../../modules/globalvars"
+  source = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/globalvars"
 }
 
 
@@ -109,7 +109,7 @@ cidr_blocks      = ["0.0.0.0/0"]
 
 #Deploy security groups 
 module "sg-dev" {
-  source       = "/home/ec2-user/environment/environment/modules/sg_group"
+  source       = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/sg_group"
   prefix       = module.globalvars.prefix
   default_tags = module.globalvars.default_tags
   env          = var.env
@@ -123,7 +123,7 @@ module "sg-dev" {
 
 #Deploy application load balancer
 module "alb-dev" {
-  source       = "/home/ec2-user/environment/environment/modules/load_blancer"
+  source       = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/load_balancer"
   prefix       = module.globalvars.prefix
   default_tags = module.globalvars.default_tags
   env          = var.env
@@ -133,7 +133,7 @@ module "alb-dev" {
 
 #Deploy webserver launch configuration
 module "launch-config-dev" {
-  source        = "/home/ec2-user/environment/environment/modules/launch_config"
+  source        = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/launch_config"
   prefix        = module.globalvars.prefix
   env           = var.env
   sg_id         = module.sg-dev.lb_sg_id
@@ -143,7 +143,7 @@ module "launch-config-dev" {
 
 # Auto Scaling Group
 module "asg-dev" {
-  source             = "/home/ec2-user/environment/environment/modules/autoscalling_group"
+  source             = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/autoscalling_group"
   prefix             = module.globalvars.prefix
   env                = var.env
   default_tags       = module.globalvars.default_tags
