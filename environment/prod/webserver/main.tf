@@ -112,7 +112,7 @@ module "asg-prod" {
   prefix             = module.globalvars.prefix
   env                = var.env
   default_tags       = module.globalvars.default_tags
-  #desired_capacity   = var.asg_desired_size
+  min_size           = var.min_size
   target_group_arn   = module.alb-prod.aws_lb_target_group_arn
   launch_config_name = module.launch-config-prod.launch_config_name
 }

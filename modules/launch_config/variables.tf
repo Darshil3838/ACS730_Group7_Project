@@ -52,13 +52,14 @@ variable "type" {
 
 
 
-
+/*
 
 variable "asg_desired_size" {
   default     = 2
   type        = string
   description = "Desired capacity of auto scaling group"
 }
+*/
 
 
 

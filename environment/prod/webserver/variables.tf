@@ -26,3 +26,12 @@ variable "cloud_public_ip"{
   type          =string
   description = "public IP OF CLOUD9"
 }
+
+
+
+
+variable "min_size" {
+  default     = 2
+  type        = number
+  description = "Minimum capacity of Auto scaling group"
+}

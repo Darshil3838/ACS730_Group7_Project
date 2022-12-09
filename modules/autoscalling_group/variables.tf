@@ -44,8 +44,7 @@ variable "launch_config_name" {
 }
 
 variable "min_size" {
-  default     = 2
-  type        = number
+  type        = any
   description = "Minimum capacity of Auto scaling group"
 }
 
@@ -56,7 +55,7 @@ variable "max_size" {
 }
 
 variable "desired_size" {
-  default     = 2
-  type        = number
+default = 3
+  type        = any
   description = "Desired capacity of Auto scaling group"
 }
