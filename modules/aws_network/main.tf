@@ -65,3 +65,25 @@ resource "aws_internet_gateway" "igw" {
     }
   )
 }
+
+
+
+# Elastic IP for NAT gateway
+resource "aws_eip" "eip_for_nat_gateway" {
+  vpc = true
+  tags = merge(local.default_tags,
+    {
+      "Name" = "${local.name_prefix}-EIP"
+    }
+  )
+}
+
+# Create NAT Gateway
+resource "aws_nat_gateway" "nat_gateway" {
+  allocation_id = aws_eip.eip_for_nat_gateway.id
+  subnet_id = aws_subnet.public_subnet[0].id
+
+  tags = {
+    Name = "${local.name_prefix}-GW-NAT"
+  }
+}
