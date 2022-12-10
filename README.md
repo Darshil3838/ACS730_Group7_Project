@@ -106,7 +106,6 @@
         ACS730_FinalProject/environment/dev/network/
         tf destroy --auto-approve 
 
-    Within the process evey commit has to be pulled and changes are commited and pushed to the respective environment in git
-    which was created and given permission to each member
+   
 
 
