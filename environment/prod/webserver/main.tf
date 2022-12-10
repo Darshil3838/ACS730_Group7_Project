@@ -50,7 +50,7 @@ resource "aws_instance" "bastion" {
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.web_key.key_name
   subnet_id                   = data.terraform_remote_state.network.outputs.public_subnet_id[0]
-  security_groups             = [module.sg-dev.bastion_sg_id]
+  security_groups             = [module.sg-prod.bastion_sg_id]
   associate_public_ip_address = true
 
   lifecycle {
@@ -72,10 +72,8 @@ resource "aws_key_pair" "web_key" {
 }
 
 
-
-
 #Deploy security groups 
-module "sg-dev" {
+module "sg-prod" {
   source       = "/home/ec2-user/environment/ACS730_Group7_Project/modules/sg_group"
   prefix       = module.globalvars.prefix
   default_tags = module.globalvars.default_tags
@@ -89,37 +87,36 @@ module "sg-dev" {
 
 
 #Deploy application load balancer
-module "alb-dev" {
+module "alb-prod" {
   source       = "/home/ec2-user/environment/ACS730_Group7_Project/modules/load_balancer"
   prefix       = module.globalvars.prefix
   default_tags = module.globalvars.default_tags
   env          = var.env
-  sg_id        = module.sg-dev.lb_sg_id
+  sg_id        = module.sg-prod.lb_sg_id
 }
 
 
 #Deploy webserver launch configuration
-module "launch-config-dev" {
+module "launch-config-prod" {
   source        = "/home/ec2-user/environment/ACS730_Group7_Project/modules/launch_config"
   prefix        = module.globalvars.prefix
   env           = var.env
-  sg_id         = module.sg-dev.lb_sg_id
+  sg_id         = module.sg-prod.lb_sg_id
   instance_type = var.instance_type
 }
 
 
 # Auto Scaling Group
-module "asg-dev" {
+module "asg-prod" {
   source             = "/home/ec2-user/environment/ACS730_Group7_Project/modules/autoscalling_group"
   prefix             = module.globalvars.prefix
   env                = var.env
   default_tags       = module.globalvars.default_tags
-  
+    
   min_size             = lookup(var.min_size, var.env)
   desired_size     = lookup(var.desired_size, var.env)
   max_size             = lookup(var.max_size, var.env)
   
-  
-  target_group_arn   = module.alb-dev.aws_lb_target_group_arn
-  launch_config_name = module.launch-config-dev.launch_config_name
+  target_group_arn   = module.alb-prod.aws_lb_target_group_arn
+  launch_config_name = module.launch-config-prod.launch_config_name
 }

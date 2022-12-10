@@ -2,13 +2,13 @@
 yum -y update
 yum -y install httpd
 myip=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
-sudo aws s3 cp s3://dev-group7/daffodil.jpeg /var/www/html/
-sudo aws s3 cp s3://dev-group7/rose.jpeg /var/www/html/
-sudo aws s3 cp s3://dev-group7/hibiscus.jpeg /var/www/html/
-sudo aws s3 cp s3://dev-group7/tulip.jpeg /var/www/html/
-sudo aws s3 cp s3://dev-group7/daisy.jpeg /var/www/html/
-sudo aws s3 cp s3://dev-group7/sunflower.jpeg /var/www/html/
-sudo aws s3 cp s3://dev-group7/lilly.jpeg /var/www/html/
+sudo aws s3 cp s3://dev-group7-project/daffodil.jpeg /var/www/html/
+sudo aws s3 cp s3://dev-group7-project/rose.jpeg /var/www/html/
+sudo aws s3 cp s3://dev-group7-project/hibiscus.jpeg /var/www/html/
+sudo aws s3 cp s3://dev-group7-project/tulip.jpeg /var/www/html/
+sudo aws s3 cp s3://dev-group7-project/daisy.jpeg /var/www/html/
+sudo aws s3 cp s3://dev-group7-project/sunflower.jpeg /var/www/html/
+sudo aws s3 cp s3://dev-group7-project/lilly.jpeg /var/www/html/
 
 
 

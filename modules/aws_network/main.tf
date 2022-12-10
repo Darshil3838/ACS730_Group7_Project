@@ -9,7 +9,7 @@ data "aws_availability_zones" "available" {
 
 # Retrieve global variables from the Terraform module
 module "globalvars" {
-  source = "/home/ec2-user/environment/ACS730_Group7_Project/environment/modules/globalvars"
+  source = "/home/ec2-user/environment/ACS730_Group7_Project/modules/globalvars"
 }
 
 
