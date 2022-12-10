@@ -4,9 +4,9 @@
 --------------------------------------------------<!-- CREATION OF BUCKET -->-------------------------------
 Create 3 bucket for 3 environment
 
-dev-group7-project        <dev envt>
-staging-group7-project   <staging envt>
-prod-group7-project      <prod envt>
+dev-group7-project        <dev env>
+staging-group7-project   <staging env>
+prod-group7-project      <prod env>
 
 Upload the below mentioned photos in each bucket (format should be in .jpeg)
 dafodil.jpeg
