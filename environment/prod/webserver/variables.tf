@@ -14,7 +14,7 @@ variable "env" {
 
 #private ip for cloud9 needs to add cloud9's private ip mannualy
 variable "cloud_private_ip"{
-  default      = "172.31.76.50"
+  default      = "172.31.25.227"
   type          =string
   description = "PRIVATE IP OF CLOUD9"
 }
