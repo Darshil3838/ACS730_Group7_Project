@@ -57,7 +57,7 @@ variable "private_subnet_cidrs" {
 
 # Number of Instances in ASG
 variable "instance_count" {
-  default = 2
+  default     = 2
   type        = string
   description = "Dev Environment Instances Count"
 }

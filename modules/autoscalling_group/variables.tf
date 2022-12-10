@@ -43,19 +43,25 @@ variable "launch_config_name" {
   description = "calling template_name from launch config"
 }
 
+
+
 variable "min_size" {
-  type        = any
+  type        = string
   description = "Minimum capacity of Auto scaling group"
 }
 
 variable "max_size" {
-  default     = 4
-  type        = number
+  #default     = 4
+  type        = string
   description = "Maximum capacity of Auto scaling group"
 }
 
 variable "desired_size" {
-default = 3
-  type        = any
+ # default = 3
+  type        = string
   description = "Desired capacity of Auto scaling group"
 }
+
+
+
+

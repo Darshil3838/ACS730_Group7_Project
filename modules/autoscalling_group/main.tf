@@ -31,13 +31,12 @@ locals {
 
 # Auto Scaling Group
 resource "aws_autoscaling_group" "asg_bar" {
-  name                 = "dev-asg"
+  name                 = "${local.name_prefix}-asg"
   desired_capacity     = var.desired_size
   max_size             = var.max_size
   min_size             = var.min_size
   launch_configuration = var.launch_config_name
-  vpc_zone_identifier  = [data.terraform_remote_state.network.outputs.private_subnet_id[0], data.terraform_remote_state.network.outputs.private_subnet_id[1], data.terraform_remote_state.network.outputs.private_subnet_id[2]]
-  #depends_on           = [aws_lb.alb]
+  vpc_zone_identifier  = [data.terraform_remote_state.network.outputs.private_subnet_id[0], data.terraform_remote_state.network.outputs.private_subnet_id[1], data.terraform_remote_state.network.outputs.private_subnet_id[2]] 
   target_group_arns    = [var.target_group_arn]
   enabled_metrics = [
     "GroupMinSize",

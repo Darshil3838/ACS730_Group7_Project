@@ -109,7 +109,11 @@ module "asg-staging" {
   prefix             = module.globalvars.prefix
   env                = var.env
   default_tags       = module.globalvars.default_tags
-  min_size           = var.min_size
+    
+  min_size             = lookup(var.min_size, var.env)
+  desired_size     = lookup(var.desired_size, var.env)
+  max_size             = lookup(var.max_size, var.env)
+  
   target_group_arn   = module.alb-staging.aws_lb_target_group_arn
   launch_config_name = module.launch-config-staging.launch_config_name
 }

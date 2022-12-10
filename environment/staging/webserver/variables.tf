@@ -30,12 +30,35 @@ variable "cloud_public_ip"{
 
 
 
-
-
-
-
+# Minimum Size for the auto scaling group based on environment
 variable "min_size" {
-  default     = 3
-  type        = number
-  description = "Minimum capacity of Auto scaling group"
+  default = {
+    "prod"    = "1"
+    "staging" = "1"
+    "dev"     = "1"
+  }
+  description = "Minimum Size for the auto scaling group"
+  type        = map(string)
+}
+
+# MMaximum Size for the auto scaling group based on environment
+variable "desired_size" {
+  default = {
+    "prod"    = "3"
+    "staging" = "3"
+    "dev"     = "2"
+  }
+  description = "Desired Capaicty for the auto scaling group"
+  type        = map(string)
+}
+
+# Maximum Size for the auto scaling group based on environment
+variable "max_size" {
+  default = {
+    "prod"    = "4"
+    "staging" = "4"
+    "dev"     = "4"
+  }
+  description = "Maximum Size for the auto scaling group"
+  type        = map(string)
 }

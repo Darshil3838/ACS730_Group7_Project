@@ -59,7 +59,12 @@ resource "aws_lb_target_group" "group" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.network.outputs.vpc_id
-  
+  health_check {
+    healthy_threshold   = 2
+    unhealthy_threshold = 6
+    timeout             = 60
+    interval            = 61
+  }
 
   
 
